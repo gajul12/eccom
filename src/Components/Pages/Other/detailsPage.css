@@ -1,0 +1,7 @@
+.input-group1 {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 18%;
+}
