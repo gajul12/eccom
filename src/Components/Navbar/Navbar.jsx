@@ -16,6 +16,9 @@ const Navbar = () => {
     const [flag, setFlag] = useState(false)
     const [show, setShow] = useState(false);
     const [cshow, setCshow] = useState(false);
+  
+    console.log("Navbar call")
+
     useEffect(() => {
         const loginDetails = localStorage.getItem("UserInfo");
         if (loginDetails !== null && loginDetails !== "admin") {

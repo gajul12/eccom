@@ -17,6 +17,7 @@ import Dashboard from './Components/Pages/Home/Dashboard';
 import Addproduct from './Components/Pages/AddProduct/Addproduct';
 import axios from 'axios';
 import Cart from './Components/Pages/Cart/Cart';
+import Tv from './Components/Pages/Tv/Tv';
 
 const AppContext = createContext();
 
@@ -26,7 +27,7 @@ function App() {
   const [price, setPrice] = useState(0);
   const getCartData = async()=>{
     const loginDetails = JSON.parse(localStorage.getItem("UserInfo"));
-    const dataCart = await axios("http://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId",{params: {id:loginDetails?.custId }})
+    const dataCart = await axios.get("http://onlinetestapi.gerasim.in/api/Ecomm/GetCartProductsByCustomerId",{params: {id:loginDetails.custId }})
     const dataCount = dataCart?.data?.data;     
     setCartData(dataCount);
     let sum = 0;
@@ -38,6 +39,7 @@ function App() {
                 setPrice(totalPrice);
          });
   }
+  console.log("App Component call")
   useEffect(()=>{
     getCartData();
   },[])
@@ -53,6 +55,7 @@ function App() {
           <Route path='/laptop' element={<Laptop></Laptop>}></Route>
           <Route path='/mobile' element={ <Mobile></Mobile>}></Route>
           <Route path='/monitor' element={<Monitor></Monitor>}></Route>
+          <Route path='/tv' element={<Tv></Tv>}></Route>
           <Route path='/tablet' element={<Tablet></Tablet> }></Route>
           <Route path='/detailspage' element={<DetailsPage></DetailsPage>}> </Route>
           <Route path='/login' element={<Login></Login>}></Route>

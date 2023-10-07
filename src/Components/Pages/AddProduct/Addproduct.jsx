@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './addproduct.css'
+import Inputui from '../UI/Inputui';
 
 const Addproduct = () => {
     const [selData, setSelData] = useState([]);
+    const [error, setError] = useState([]);
     const [formData, setFormData] = useState({
         "ProductSku": "",
         "ProductName": "",
@@ -37,14 +39,28 @@ const Addproduct = () => {
         }))
 
     }
+    const handleError = (fieldName) =>{
+        return error.indexOf(fieldName) > -1 ? true : false ;
+       }
     const submitHandler = async (e) => {
         e.preventDefault();
-        try {
-            let res = await axios.post("https://onlinetestapi.gerasim.in/api/Ecomm/CreateProduct", formData)
-            console.log(res?.data?.data);
-            alert(res?.data?.message);
-        } catch (error) {
-            console.log(error)
+        let localError = [];
+        for (let x in formData) {
+            if (formData[x] === "") {
+                localError.push(x)
+            }
+        }
+        setError(localError);
+        if (localError.length === 0) {
+            try {
+                let res = await axios.post("https://onlinetestapi.gerasim.in/api/Ecomm/CreateProduct", formData)
+                console.log(res?.data?.data);
+                alert(res?.data?.message);
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            alert(localError)
         }
     }
     return (
@@ -53,6 +69,7 @@ const Addproduct = () => {
             <form onSubmit={(e) => submitHandler(e)}>
                 <div class="form-row">
                     <div class="input-data">
+                    {/* <Inputui type="text" value={formData.ProductSku} fieldName="ProductSku" onChangeHandler={commmonHandler} error={handleError("Name")}></Inputui> */}
                         <input type="text" required value={formData.ProductSku} onChange={(e) => commmonHandler("ProductSku", e)} />
                         <div class="underline"></div>
                         <label for="">ProductSku</label>
@@ -84,7 +101,7 @@ const Addproduct = () => {
                     <div class="input-data">
                         <input type="Date" required value={formData.CreatedDate} onChange={(e) => commmonHandler("CreatedDate", e)} />
                         <div class="underline"></div>
-                        <label for="">CreatedDate</label>
+                        {/* <label for="">CreatedDate</label> */}
                     </div>
                 </div>
                 <div class="form-row">

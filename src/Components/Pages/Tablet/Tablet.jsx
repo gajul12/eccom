@@ -6,27 +6,27 @@ import { Link } from 'react-router-dom';
 import Spinner from '../UI/Spinner';
 
 const Tablet = () => {
-    const [mobileData, setMobileData] = useState([]);
+    const [tabletData, setTabletData] = useState([]);
     const [loading, setLoading] = useState([true]);
     useEffect(() => {
 
-        const getMobileData = async () => {
+        const getTabletData = async () => {
             try {
                 const res = await axios.get('https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId', { params: { id: 3 } })
                 console.log(res);
                 setLoading(false);
-                setMobileData(res?.data?.data);
+                setTabletData(res?.data?.data);
 
             } catch (error) {
                 console.log(error)
             }
         }
-        getMobileData();
+        getTabletData();
 
     }, [])
     return (
         <div>
-            <h1>Mobile</h1>
+            <h1>Tablet</h1>
             <div className="container">
                 <div className="row">
                     <div className="col-4 offset-4 px-3 py-3">
@@ -35,7 +35,7 @@ const Tablet = () => {
                 </div>
                 <div className="row">
                     {
-                        mobileData?.length > 0 && mobileData.map((item) => {
+                        tabletData?.length > 0 && tabletData.map((item) => {
                             return (
                                 <div className="col-4">
                                     <div className="card m-2 " style={{ width: "18rem", height: "200" }}>

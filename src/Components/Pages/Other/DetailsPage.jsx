@@ -38,9 +38,7 @@ const DetailsPage = () => {
                 let result = await axios.post("http://onlinetestapi.gerasim.in/api/Ecomm/AddToCart", cartDetail);
                 console.log(result?.data?.result);
                 alert(result?.data?.message)
-                if (result?.data?.result === true) {
                     contextfunc.getCartData();
-                }
             } catch (error) {
                 alert(error)
             }
@@ -48,6 +46,7 @@ const DetailsPage = () => {
             nav('/login')
         }
     }
+     console.log("Details Page call")
 
     return (
         <div>

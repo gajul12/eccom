@@ -48,7 +48,7 @@ form .form-row .input-data{
 form .form-row .textarea{
   height: 70px;
 }
-.input-data input,
+.input-data  input,
 .textarea textarea{
   display: block;
   width: 100%;

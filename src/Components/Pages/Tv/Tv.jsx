@@ -4,37 +4,39 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom';
 import Spinner from '../UI/Spinner';
-const Mobile = () => {
-    const [mobileData, setMobileData] = useState([]);
+
+const Tv = () => {
+    const [tvData, setTvData] = useState([]);
     const [loading, setLoading] = useState(true);
+    
     useEffect(() => {
 
-        const getMobileData = async () => {
+        const getTvData = async () => {
             try {
-                const res = await axios.get('https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId', { params: { id: 1 } })
+                const res = await axios.get('https://onlinetestapi.gerasim.in/api/Ecomm/GetAllProductsByCategoryId', { params: { id: 8 } })
                 console.log(res);
                 setLoading(false);
-                setMobileData(res?.data?.data);
+                setTvData(res?.data?.data);
 
             } catch (error) {
-                console.log(error)
+
             }
         }
-        getMobileData();
+        getTvData();
 
     }, [])
     return (
         <div>
-            <h1>Mobile</h1>
+            <h1>Tv</h1>
             <div className="container">
-                <div className="row">
+            <div className="row">
                     <div className="col-4 offset-4 px-3 py-3">
                     {loading && <Spinner></Spinner>}
                     </div>
                 </div>
                 <div className="row">
                     {
-                        mobileData?.length > 0 && mobileData.map((item) => {
+                        tvData?.length > 0 && tvData.map((item) => {
                             return (
                                 <div className="col-4">
                                     <div className="card m-2 " style={{ width: "18rem", height: "200" }}>
@@ -61,4 +63,4 @@ const Mobile = () => {
     );
 };
 
-export default Mobile;
+export default Tv;
